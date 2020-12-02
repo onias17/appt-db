@@ -33,7 +33,12 @@ app.get('/', (req, res) => {
 });
 
 // Appointment
-app.use('/appointment', ctrl.appointments);
+app.use('/appointments', ctrl.appointments);
+
+// 404
+app.use('*', (req, res) => {
+  res.render('404');
+});
 
 // ---------- LISTENER
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
