@@ -1,44 +1,24 @@
 // ---------- CONFIG
 const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const methodOverride = require('method-override');
+const cors = require('cors');
+const routes = require('./routes');
 const app = express()
-
-// DOTENV 
-require('dotenv').config();
 const PORT = process.env.PORT || 4000;
 
-// ENGINE VIEW
-app.set('view engine', 'ejs');
+const corsOptions = {
+  origin: 'http://localhost:4001'
+}
 
-// ---------- CONTROLLERS
-const ctrl = require('./controllers');
 
 // ---------- MIDDLEWARE 
-// BODY PARSER 
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
-// METHOD OVERRIDE
-app.use(methodOverride('_method'));
-
-// LOGGING
-app.use(morgan(':method :url'));
+// CORS
+app.use(express.json());
+app.use(cors(corsOptions));
 
 // ---------- ROUTES
-// HOME
-app.get('/', (req, res) => {
-  res.render('index');
-});
 
-// Appointment
-app.use('/appointments', ctrl.appointments);
-
-// 404
-app.use('*', (req, res) => {
-  res.render('404');
-});
+// API
+app.use('/api/v1/appointments', routes.appointments);
 
 // ---------- LISTENER
 app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));

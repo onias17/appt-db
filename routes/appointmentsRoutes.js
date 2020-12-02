@@ -8,4 +8,4 @@ router.post('/', ctrl.appointments.create);
 router.put('/:id', ctrl.appointments.update);
 router.delete('/:id', ctrl.appointments.destroy);
 
-module.exports = router;
+module.exports = router;  

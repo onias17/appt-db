@@ -6,19 +6,13 @@ const db = require('../models');
 
 // ---------- GET index
 const index = (req, res) => {
-  // db.Appointment.find({}, (err, allAppointments) => {
-  //   if(err) return console.log(err);
-    
-  //   res.render('appointments/index', {appointments: allAppointments});
-  // });
-
   db.Appointment.find({})
     .then((foundAppointments) => {
       res.json({ appointments: foundAppointments })
     })
     .catch((err) => {
       console.log('error in appointments.index', err)
-      res.json({ Error: 'unable to get your data'})
+      res.json({ Error: 'unable to get your data' })
     });
 };
 
@@ -36,14 +30,9 @@ const show = (req, res) => {
 
 // ---------- POST create appointment
 const create = (req, res) => {
-  // db.Appointment.create(req.body, (err, newAppointment) => {
-  //   if(err) return console.log(err);
-  //   console.log('new:', newAppointment)
-  //   res.redirect('/appointments');
-
-  db.Appointment.findById(req.body)
+  db.Appointment.create(req.body)
     .then((savedAppointment) => {
-      res.json({ apppointment: savedAppointment })
+      res.status(201).json({ apppointment: savedAppointment })
     })
     .catch((err) => {
       console.log('error in the appointment.create:', err);
@@ -53,14 +42,16 @@ const create = (req, res) => {
 
 // ---------- UPDATE edit appointment
 const update = (req,res) => {
-  db.Appointment.findByIdAndDelete(req.params.id)
-    .then((updatedAppointment) => {
-      res.json({ appointment: updatedAppointment })
-    })
-    .catch((err) => {
-      console.log('error in the appointment.update:', err);
-      res.json({ Error: 'unable to get data' })
-    });
+  db.Appointment.findByIdAndDelete(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, updatedAppointment) => {
+      if(err) console.log('Error in appointments.update:', err)
+
+      res.json({ appointment: updatedAppointment });
+    }
+  );
 };
 
 // ---------- DELETE delete appointment
