@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
-const app = exspress()
+const app = express()
 
 // DOTENV 
 require('dotenv').config();

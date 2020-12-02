@@ -1,3 +1,3 @@
 module.exports = {
-  appointments: require('/appointmentsController'),
+  appointments: require('./appointmentsController'),
 };
