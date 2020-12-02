@@ -35,7 +35,7 @@ const show = (req, res) => {
     .catch((err) => {
       console.log('error in appointment.show', err)
       res.json({ Error: 'unable to get your data' })
-    })
+    });
 };
 
 // ---------- POST create appointment
@@ -47,7 +47,6 @@ const create = (req, res) => {
 
   db.Appointment.findById(req.body)
     .then((savedAppointment) => {
-      console.log(savedAppointment);
       res.json({ apppointment: savedAppointment })
     })
     .catch((err) => {
@@ -65,7 +64,7 @@ const update = (req,res) => {
     .catch((err) => {
       console.log('error in the appointment.update:', err);
       res.json({ Error: 'unable to get data' })
-    })
+    });
 };
 
 // ---------- DELETE delete appointment
