@@ -28,3 +28,12 @@ app.use(morgan(':method :url'));
 
 // ---------- ROUTES
 // HOME
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
+// Appointment
+app.use('/appointment', ctrl.appointments);
+
+// ---------- LISTENER
+app.listen(PORT, () => console.log(`Server is running on port: ${PORT}`));
