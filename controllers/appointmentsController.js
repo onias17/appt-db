@@ -1,7 +1,3 @@
-// ---------- CONFIG
-const express = require('express');
-const router = express.Router();
-
 // ---------- DATABASE
 const { reset } = require('nodemon');
 const db = require('../models');
