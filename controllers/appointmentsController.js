@@ -30,6 +30,7 @@ const show = (req, res) => {
 
 // ---------- POST create appointment
 const create = (req, res) => {
+  console.log(req.body)
   db.Appointment.create(req.body)
     .then((savedAppointment) => {
       res.status(201).json({ apppointment: savedAppointment })

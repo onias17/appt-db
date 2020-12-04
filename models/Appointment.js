@@ -14,6 +14,12 @@ const appointmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  date: {
+    type: Date,
+  },
+  user: {
+    userId: String,
+  }
 }, {timestamps: true});
 
 const Appointment = mongoose.model('Appointment', appointmentSchema);
